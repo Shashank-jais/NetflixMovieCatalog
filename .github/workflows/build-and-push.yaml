@@ -15,7 +15,6 @@ env:
 jobs:
   
   Build:
-
     name: Build Docker Image
     runs-on: ubuntu-latest
 
@@ -28,7 +27,7 @@ jobs:
 
       - name: Docker Login
         run: |
-          echo ${{ secrets.AWS_ECR_PASSWORD }} | docker login --username ${{ env.AWS_ECR_USERNAME }}  --password-stdin ${{ env.AWS_ECR_REGISTRY }}
+          echo ${{ secrets.AWS_ECR_PASSWORD }} | docker login --username ${{ env.AWS_ECR_USERNAME }} --password-stdin ${{ env.AWS_ECR_REGISTRY }}
 
       - name: Build Image
         env:
@@ -41,3 +40,4 @@ jobs:
           IMAGE_NAME: ${{ env.AWS_ECR_REGISTRY }}/${{ env.AWS_ECR_REPOSITORY }}:${{ env.IMAGE_TAG }}
         run: |
           docker push ${{ env.IMAGE_NAME }}
+
